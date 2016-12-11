@@ -1,19 +1,25 @@
 # challenge
 
-Instructions
+
+## Instructions
 
 
-git clone repo
+1. git clone repo
 
 
-`npm install`
+2. `npm install`
 
 
-`bower install`
+3. `bower install`
 
 
-`http-server`
+4. `http-server`
 
 
-Open [http://127.0.0.1:8080](http://127.0.0.1:8080) in your browser.
+5. Open [http://127.0.0.1:8080](http://127.0.0.1:8080) in your browser.
 
+
+6. Visit my personal site: [http://alexw.tech](http://alexw.tech)
+
+
+Thanks! :)
