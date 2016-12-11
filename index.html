@@ -1,0 +1,45 @@
+<html>
+<head>
+  <title></title>
+  <script src='bower_components/angular/angular.js'></script>
+  <script type='text/javascript'>
+    var myApp = angular.module('myApp', []);
+    myApp.controller('productsController', ['$scope','$http', function ($scope,$http){
+      $scope.products = [];
+      var stuff = $http({
+        method: 'GET',
+        url: 'https://sneakpeeq-sites.s3.amazonaws.com/interviews/ce/feeds/store.js'
+      }).then(function successCallback(response) {
+        console.log(response.data.products);
+        $scope.products= response.data.products;
+      }, function errorCallback(error) {
+        console.log(error);
+      });
+
+    }])
+  </script>
+</head>
+<body ng-app='myApp'>
+  <div ng-controller='productsController'>
+    Search Products: <input type="text" ng-model="filter_name"><br><br>
+    <table>
+      <thead>
+        <tr>
+          <th><a href="#" ng-click="orderByField='name'; reverseSort = !reverseSort">Product Name</a></th>
+          <th>Product Image</th>
+          <th><a href="#" ng-click="orderByField='defaultPriceInCents'; reverseSort = !reverseSort">Product Price</a></th>
+          <th><a href="#" ng-click="orderByField='createdAt'; reverseSort = !reverseSort">Date Added</a></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="product in products | orderBy:orderByField:reverseSort | filter:filter_name">
+          <td>{{ product.name }}</td>
+          <td><img src="{{ product.mainImage.ref }}"></td>
+          <td>{{ product.defaultPriceInCents/100 | currency }}</td>
+          <td>{{ product.createdAt | date }}</td>
+        </tr>
+      </tbody>
+    </table>    
+  </div>
+</body>
+</html>
